@@ -11,7 +11,7 @@ import WaveDivider from "@/components/ui/wave-divider";
 import ProductCard from "@/components/product/product-card";
 import Navbar from "@/components/layout/navbar";
 import Footer from "@/components/layout/footer";
-import BrandHeroVisual from "@/components/brand/BrandHeroVisual";
+
 import { SEO } from "@/components/seo/seo";
 import { SEO_DATA } from "@/lib/seo-data";
 import { PRODUCTS } from "@/lib/products-data";
@@ -150,7 +150,7 @@ export default function HomePage() {
               <img
                 src="/streetwear-egyptian-sketch.png"
                 alt="OHANNA Egyptian Streetwear"
-                className="absolute inset-0 w-full h-full object-cover object-top"
+                className="w-full h-auto object-contain"
                 loading="eager"
               />
               <div className="absolute bottom-0 left-0 right-0 h-24 bg-gradient-to-t from-[#1B1B1B]/75 to-transparent flex items-end justify-center pb-3">
@@ -242,11 +242,11 @@ export default function HomePage() {
             </FadeUp>
 
             <FadeUp delay={0.15} className="relative hidden lg:block">
-              <div className="relative w-full rounded-2xl overflow-hidden shadow-2xl border border-[#C89D29]/20 min-h-[480px]">
+              <div className="relative w-full rounded-2xl overflow-hidden shadow-2xl border border-[#C89D29]/20">
                 <img
                   src="/egyptian-streetwear-timeline.png"
                   alt="The OHANNA Legacy"
-                  className="absolute inset-0 w-full h-full object-cover object-center"
+                  className="w-full h-auto object-contain"
                   loading="lazy"
                 />
                 <div className="absolute inset-0 bg-gradient-to-t from-[#1B1B1B]/50 via-transparent to-transparent" />

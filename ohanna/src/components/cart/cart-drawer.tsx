@@ -4,12 +4,15 @@ import { X, ShoppingBag, Trash2, Plus, Minus, ArrowRight, Tag } from "lucide-rea
 import { Link, useLocation } from "wouter";
 import { toast } from "sonner";
 import { useCart } from "@/contexts/cart-context";
+import { useLang } from "@/contexts/lang-context";
+import { getTranslatedProduct } from "@/lib/product-translations";
 import { fmt } from "@/lib/products-data";
 
 const FREE_SHIPPING_THRESHOLD = 1500;
 
 export default function CartDrawer() {
   const { items, isOpen, closeCart, removeFromCart, updateQuantity, total, itemCount } = useCart();
+  const { lang } = useLang();
   const [, navigate] = useLocation();
 
   useEffect(() => {
@@ -93,7 +96,9 @@ export default function CartDrawer() {
                     </Link>
                   </motion.div>
                 ) : (
-                  items.map((item) => (
+                  items.map((item) => {
+                    const translatedProduct = getTranslatedProduct(item.product, lang);
+                    return (
                     <motion.div
                       key={`${item.product.id}-${item.size ?? "default"}`}
                       layout
@@ -104,11 +109,11 @@ export default function CartDrawer() {
                     >
                       <Link href={`/product/${item.product.slug ?? item.product.id}`} onClick={closeCart}
                         className="relative w-16 h-20 flex-shrink-0 rounded-lg overflow-hidden bg-[#E4D5B7] dark:bg-[#2A1E14]">
-                        <img src={item.product.imageUrl} alt={item.product.name} className="w-full h-full object-cover" />
+                        <img src={item.product.imageUrl} alt={translatedProduct.name} className="w-full h-full object-cover" />
                       </Link>
                       <div className="flex-1 min-w-0">
                         <p className="text-xs font-black hieroglyph-font truncate text-[#1B1B1B] dark:text-[#FDF8EF]">
-                          {item.product.name}
+                          {translatedProduct.name}
                         </p>
                         {item.size && (
                           <p className="text-[10px] text-[#1B1B1B]/45 dark:text-[#FDF8EF]/45 mt-0.5">
@@ -143,7 +148,7 @@ export default function CartDrawer() {
                       <button
                         onClick={() => {
                           removeFromCart(item.product.id, item.size);
-                          toast.success(`${item.product.name} removed`);
+                          toast.success(`${translatedProduct.name} removed`);
                         }}
                         className="p-1 text-[#1B1B1B]/25 dark:text-[#FDF8EF]/25 hover:text-[#AE1C1C] dark:hover:text-[#F87171] transition-colors self-start mt-0.5"
                         aria-label="Remove item"
@@ -151,7 +156,7 @@ export default function CartDrawer() {
                         <Trash2 className="h-4 w-4" />
                       </button>
                     </motion.div>
-                  ))
+                  )})
                 )}
               </AnimatePresence>
             </div>

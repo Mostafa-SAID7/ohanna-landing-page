@@ -1,13 +1,15 @@
 import { useState } from "react";
 import { motion } from "framer-motion";
-import { ShoppingBag, ArrowLeft, CheckCircle2, Minus, Plus, Star, Ruler, RotateCcw, Shield, Zap } from "lucide-react";
+import { ShoppingBag, CheckCircle2, Minus, Plus, Star, Ruler, RotateCcw, Shield, Zap } from "lucide-react";
 import { Link } from "wouter";
 import { toast } from "sonner";
 import Navbar from "@/components/layout/navbar";
 import Footer from "@/components/layout/footer";
 import ProductCard from "@/components/product/product-card";
 import { useCart } from "@/contexts/cart-context";
+import { useLang } from "@/contexts/lang-context";
 import { getProductById, fmt, BADGE_STYLES, PRODUCTS } from "@/lib/products-data";
+import { getTranslatedProduct } from "@/lib/product-translations";
 import { SEO } from "@/components/seo/seo";
 import { getProductSEO } from "@/lib/seo-data";
 
@@ -22,11 +24,21 @@ const TRUST = [
 export default function ProductPage({ id }: { id: string }) {
   const product = getProductById(id);
   const { addToCart, openCart } = useCart();
+  const { lang } = useLang();
   const [selectedSize, setSelectedSize] = useState<string>("M");
   const [quantity, setQuantity] = useState(1);
   const [added, setAdded] = useState(false);
 
-  const productSEO = product ? getProductSEO({ id: product.id, name: product.name, description: product.description, price: product.price, images: [product.imageUrl], badge: product.badge, category: product.category }) : null;
+  const translatedProduct = product ? getTranslatedProduct(product, lang) : null;
+  const productSEO = product ? getProductSEO({ 
+    id: product.id, 
+    name: product.name, 
+    description: product.description, 
+    price: product.price, 
+    images: [product.imageUrl], 
+    badge: product.badge ?? undefined, 
+    category: product.category 
+  }) : null;
 
   if (!product) {
     return (
@@ -51,7 +63,7 @@ export default function ProductPage({ id }: { id: string }) {
   const handleAdd = () => {
     for (let i = 0; i < quantity; i++) addToCart(product, selectedSize);
     setAdded(true);
-    toast.success(`${product.name} (${selectedSize}) × ${quantity} added! 𓋹`, {
+    toast.success(`${translatedProduct?.name || product.name} (${selectedSize}) × ${quantity} added! 𓋹`, {
       action: { label: "View Cart", onClick: openCart },
     });
     setTimeout(() => setAdded(false), 2000);
@@ -69,7 +81,7 @@ export default function ProductPage({ id }: { id: string }) {
             <span>/</span>
             <Link href="/collection" className="hover:text-[#C89D29] transition-colors">Collection</Link>
             <span>/</span>
-            <span className="text-[#1B1B1B]/70 dark:text-[#FDF8EF]/70 font-medium">{product.name}</span>
+            <span className="text-[#1B1B1B]/70 dark:text-[#FDF8EF]/70 font-medium">{translatedProduct?.name || product.name}</span>
           </div>
 
           <div className="grid md:grid-cols-2 gap-10 mb-20">
@@ -78,10 +90,9 @@ export default function ProductPage({ id }: { id: string }) {
                 <div className="relative aspect-[4/5] bg-[#E4D5B7] dark:bg-[#2A1E14]">
                   <img
                     src={product.imageUrl}
-                    alt={`${product.name} — OHANNA Egyptian Streetwear`}
+                    alt={`${translatedProduct?.name || product.name} — OHANNA Egyptian Streetwear`}
                     className="w-full h-full object-cover"
                     loading="eager"
-                    fetchPriority="high"
                     decoding="sync"
                   />
                   {product.badge && (
@@ -96,7 +107,7 @@ export default function ProductPage({ id }: { id: string }) {
             <motion.div initial={{ opacity: 0, x: 20 }} animate={{ opacity: 1, x: 0 }} transition={{ duration: 0.5, delay: 0.1 }} className="space-y-6">
               <div>
                 <span className="text-xs font-black hieroglyph-font text-[#C89D29] tracking-widest">{product.category}</span>
-                <h1 className="text-3xl sm:text-4xl font-black hieroglyph-font mt-1 leading-tight text-[#1B1B1B] dark:text-[#FDF8EF]">{product.name}</h1>
+                <h1 className="text-3xl sm:text-4xl font-black hieroglyph-font mt-1 leading-tight text-[#1B1B1B] dark:text-[#FDF8EF]">{translatedProduct?.name || product.name}</h1>
                 <div className="flex items-center gap-1.5 mt-2">
                   {[...Array(5)].map((_, i) => (
                     <Star key={i} className="h-4 w-4 fill-[#C89D29] text-[#C89D29]" />
@@ -106,7 +117,7 @@ export default function ProductPage({ id }: { id: string }) {
               </div>
 
               <div className="text-4xl font-black text-[#C89D29]">{fmt(product.price)}</div>
-              <p className="text-[#1B1B1B]/65 dark:text-[#FDF8EF]/65 leading-relaxed text-sm">{product.description}</p>
+              <p className="text-[#1B1B1B]/65 dark:text-[#FDF8EF]/65 leading-relaxed text-sm">{translatedProduct?.description || product.description}</p>
 
               <div>
                 <div className="flex items-center justify-between mb-2">

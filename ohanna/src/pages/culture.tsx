@@ -1,4 +1,5 @@
 import { Link } from "wouter";
+import { Eye } from "lucide-react";
 import Navbar from "@/components/layout/navbar";
 import Footer from "@/components/layout/footer";
 import WaveDivider from "@/components/ui/wave-divider";

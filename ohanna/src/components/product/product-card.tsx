@@ -7,6 +7,7 @@ import { useCart } from "@/contexts/cart-context";
 import { useLang } from "@/contexts/lang-context";
 import { translations } from "@/i18n";
 import { fmt, BADGE_STYLES } from "@/lib/products-data";
+import { getTranslatedProduct } from "@/lib/product-translations";
 import type { Product } from "@/lib/types";
 
 const BG_MAP: Record<string, string> = {
@@ -24,6 +25,7 @@ export default function ProductCard({ product, index = 0 }: { product: Product; 
   const bgColor = BG_MAP[product.category] ?? "#E4D5B7";
 
   const collT = translations[lang].collection;
+  const translatedProduct = getTranslatedProduct(product, lang);
 
   const translatedBadge = product.badge
     ? (collT.badges as Record<string, string>)[product.badge] ?? product.badge
@@ -37,7 +39,7 @@ export default function ProductCard({ product, index = 0 }: { product: Product; 
     e.preventDefault();
     e.stopPropagation();
     addToCart(product);
-    toast.success(`${product.name} ${collT.product.addedMsg}`, {
+    toast.success(`${translatedProduct.name} ${collT.product.addedMsg}`, {
       action: { label: collT.product.viewCartAction, onClick: openCart },
     });
   };
@@ -54,7 +56,7 @@ export default function ProductCard({ product, index = 0 }: { product: Product; 
         <div className="aspect-[4/5] relative" style={{ background: bgColor }}>
           <img
             src={imgError ? "/placeholder.jpg" : product.imageUrl}
-            alt={`${product.name} — OHANNA Egyptian Streetwear`}
+            alt={`${translatedProduct.name} — OHANNA Egyptian Streetwear`}
             className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105"
             loading="lazy"
             decoding="async"
@@ -83,7 +85,7 @@ export default function ProductCard({ product, index = 0 }: { product: Product; 
               {translatedCategory}
             </span>
             <h3 className="text-sm font-black hieroglyph-font mt-0.5 leading-tight text-[#1B1B1B] dark:text-[#FDF8EF] line-clamp-1">
-              {product.name}
+              {translatedProduct.name}
             </h3>
           </div>
           {product.stock <= 10 && product.stock > 0 && (
@@ -93,7 +95,7 @@ export default function ProductCard({ product, index = 0 }: { product: Product; 
           )}
         </div>
         <p className="text-xs text-[#1B1B1B]/55 dark:text-[#FDF8EF]/55 line-clamp-2 leading-relaxed mb-3">
-          {product.description}
+          {translatedProduct.description}
         </p>
         <div className="flex items-center justify-between gap-2">
           <span className="text-base font-black text-[#C89D29]">{fmt(product.price)}</span>

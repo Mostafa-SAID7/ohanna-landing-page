@@ -4,6 +4,7 @@ import WaveDivider from "@/components/ui/wave-divider";
 import { Ruler } from "lucide-react";
 import { SEO } from "@/components/seo/seo";
 import { SEO_DATA } from "@/lib/seo-data";
+import { useLang } from "@/contexts/lang-context";
 
 const TOPS_SIZES = [
   { size: "XS", chest: "86–91", shoulder: "42", length: "66", sleeve: "59" },
@@ -24,6 +25,8 @@ const BOTTOMS_SIZES = [
 ];
 
 export default function SizeGuidePage() {
+  const { t } = useLang();
+  
   return (
     <div className="min-h-screen section-paper flex flex-col">
       <SEO {...SEO_DATA.sizeGuide} />
@@ -34,9 +37,9 @@ export default function SizeGuidePage() {
         <div className="container mx-auto px-4 text-center">
           <Ruler className="h-10 w-10 text-[#C89D29] mx-auto mb-4" />
           <h1 className="text-4xl sm:text-6xl font-black hieroglyph-font mb-4 section-heading">
-            SIZE <span className="text-[#C89D29]">GUIDE</span>
+            {t("pages.sizeGuide.heroTitle")} <span className="text-[#C89D29]">{t("pages.sizeGuide.heroTitleGold")}</span>
           </h1>
-          <p className="section-muted max-w-md mx-auto text-sm">All measurements in centimeters (cm)</p>
+          <p className="section-muted max-w-md mx-auto text-sm">{t("pages.sizeGuide.heroDesc")}</p>
         </div>
       </section>
 
@@ -99,7 +102,7 @@ export default function SizeGuidePage() {
           </div>
 
           <div className="ohanna-card p-6">
-            <h3 className="font-black hieroglyph-font text-sm mb-3 section-heading">FITTING TIPS</h3>
+            <h3 className="font-black hieroglyph-font text-sm mb-3 section-heading">{t("pages.sizeGuide.tipsTitle")}</h3>
             <ul className="space-y-2 text-sm section-muted">
               <li>• OHANNA pieces run <strong className="section-heading">true to size</strong></li>
               <li>• For oversized fits (hoodies), consider <strong className="section-heading">sizing up one</strong></li>
