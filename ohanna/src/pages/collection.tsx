@@ -1,11 +1,11 @@
 import { useState, useEffect, useCallback, useMemo } from "react";
-import { motion } from "framer-motion";
 import { Search, X, Filter, Eye, ChevronLeft, ChevronRight } from "lucide-react";
 import Navbar from "@/components/layout/navbar";
 import Footer from "@/components/layout/footer";
 import ProductCard from "@/components/product/product-card";
 import { ProductGridSkeleton } from "@/components/product/product-skeleton";
 import WaveDivider from "@/components/ui/wave-divider";
+import PageHeader from "@/components/layout/page-header";
 import { CATEGORIES, FALLBACK_PRODUCTS, setProducts } from "@/lib/products-data";
 import { translations } from "@/i18n";
 import { apiClient } from "@/lib/api-client";
@@ -96,24 +96,13 @@ export default function CollectionPage() {
       <Navbar />
 
       {/* ── HEADER ── */}
-      <section className="py-14 section-sand">
-        <div className="container mx-auto px-4 text-center">
-          <motion.div initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.5 }}>
-            <div className="flex items-center justify-center gap-4 mb-4">
-              <div className="h-1 w-12 bg-[#C89D29] sketchy-line" />
-              <Eye className="h-7 w-7 text-[#C89D29]" />
-              <div className="h-1 w-12 bg-[#C89D29] sketchy-line" />
-            </div>
-            <h1 className="text-4xl sm:text-6xl font-black hieroglyph-font mb-3 section-heading">
-              {t("collection.heroTitle")} <span className="text-[#C89D29]">{t("collection.heroTitleGold")}</span>
-            </h1>
-            <p className="section-muted text-sm">
-              {filtered.length} {filtered.length !== 1 ? t("collection.piecesPlural") : t("collection.pieces")}
-              {category !== "All" && ` ${t("collection.inCategory")} ${category}`}
-            </p>
-          </motion.div>
-        </div>
-      </section>
+      <PageHeader
+        Icon={Eye}
+        title={t("collection.heroTitle")}
+        titleGold={t("collection.heroTitleGold")}
+        subtitle={`${filtered.length} ${filtered.length !== 1 ? t("collection.piecesPlural") : t("collection.pieces")}${category !== "All" ? ` ${t("collection.inCategory")} ${category}` : ""}`}
+        variant="sand"
+      />
 
       {/* Wave: Header → Filters/Products */}
       <WaveDivider from="sand" to="paper" variant={1} />

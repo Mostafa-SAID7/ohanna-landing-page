@@ -1,8 +1,8 @@
 import { Link } from "wouter";
-import { Eye } from "lucide-react";
 import Navbar from "@/components/layout/navbar";
 import Footer from "@/components/layout/footer";
 import WaveDivider from "@/components/ui/wave-divider";
+import PageHeader from "@/components/layout/page-header";
 import { SEO } from "@/components/seo/seo";
 import { SEO_DATA } from "@/lib/seo-data";
 import { useLang } from "@/contexts/lang-context";
@@ -34,21 +34,13 @@ export default function CulturePage() {
       <Navbar />
 
       {/* ── HERO ── */}
-      <section className="py-24 section-ink text-[#FDF8EF] text-center relative overflow-hidden">
-        <div className="container mx-auto px-4 relative z-10">
-          <div className="flex items-center justify-center gap-4 mb-6">
-            <div className="h-px w-16 bg-[#C89D29]/40" />
-            <span className="text-4xl text-[#C89D29]">𓋹</span>
-            <div className="h-px w-16 bg-[#C89D29]/40" />
-          </div>
-          <h1 className="text-5xl sm:text-7xl font-black hieroglyph-font hieroglyph-shadow mb-6">
-            {t("pages.culture.heroTitle")} <span className="text-[#C89D29]">{t("pages.culture.heroTitleGold")}</span>
-          </h1>
-          <p className="text-[#FDF8EF]/70 text-lg max-w-2xl mx-auto leading-relaxed">
-            {t("pages.culture.heroDesc")}
-          </p>
-        </div>
-      </section>
+      <PageHeader
+        glyph="𓋹"
+        title={t("pages.culture.heroTitle")}
+        titleGold={t("pages.culture.heroTitleGold")}
+        subtitle={t("pages.culture.heroDesc")}
+        variant="ink"
+      />
 
       {/* Wave: Hero → Symbols */}
       <WaveDivider from="ink" to="paper" variant={3} />

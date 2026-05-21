@@ -1,10 +1,11 @@
 import { useState } from "react";
 import { motion } from "framer-motion";
-import { MapPin, Mail, Clock, Send, ChevronDown, ChevronUp } from "lucide-react";
+import { MapPin, Mail, Clock, Send, ChevronDown, ChevronUp, MessageCircle } from "lucide-react";
 import { toast } from "sonner";
 import Navbar from "@/components/layout/navbar";
 import Footer from "@/components/layout/footer";
 import WaveDivider from "@/components/ui/wave-divider";
+import PageHeader from "@/components/layout/page-header";
 import { SEO } from "@/components/seo/seo";
 import { SEO_DATA } from "@/lib/seo-data";
 import { useLang } from "@/contexts/lang-context";
@@ -90,16 +91,13 @@ export default function ContactPage() {
       <Navbar />
 
       {/* ── HEADER ── */}
-      <section className="py-16 section-sand">
-        <div className="container mx-auto px-4 text-center">
-          <h1 className="text-4xl sm:text-6xl font-black hieroglyph-font mb-4 section-heading">
-            {t("contact.pageTitle")} <span className="text-[#C89D29]">{t("contact.pageTitleGold")}</span>
-          </h1>
-          <p className="section-muted max-w-md mx-auto text-sm">
-            {t("contact.pageDesc")}
-          </p>
-        </div>
-      </section>
+      <PageHeader
+        Icon={MessageCircle}
+        title={t("contact.pageTitle")}
+        titleGold={t("contact.pageTitleGold")}
+        subtitle={t("contact.pageDesc")}
+        variant="sand"
+      />
 
       {/* Wave: Header → Main */}
       <WaveDivider from="sand" to="paper" variant={2} />

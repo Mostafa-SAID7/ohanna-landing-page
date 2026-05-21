@@ -1,6 +1,7 @@
 import Navbar from "@/components/layout/navbar";
 import Footer from "@/components/layout/footer";
 import WaveDivider from "@/components/ui/wave-divider";
+import PageHeader from "@/components/layout/page-header";
 import { Truck, RotateCcw, Shield } from "lucide-react";
 import { SEO } from "@/components/seo/seo";
 import { SEO_DATA } from "@/lib/seo-data";
@@ -31,13 +32,12 @@ export default function ShippingPage() {
       <Navbar />
 
       {/* ── HEADER ── */}
-      <section className="py-16 section-sand">
-        <div className="container mx-auto px-4 text-center">
-          <h1 className="text-4xl sm:text-6xl font-black hieroglyph-font mb-4 section-heading">
-            {t("pages.shipping.heroTitle")} <span className="text-[#C89D29]">{t("pages.shipping.heroTitleGold")}</span>
-          </h1>
-        </div>
-      </section>
+      <PageHeader
+        Icon={Truck}
+        title={t("pages.shipping.heroTitle")}
+        titleGold={t("pages.shipping.heroTitleGold")}
+        variant="sand"
+      />
 
       {/* Wave: Header → Content */}
       <WaveDivider from="sand" to="paper" variant={2} flip />

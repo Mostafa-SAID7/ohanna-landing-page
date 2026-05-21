@@ -5,6 +5,7 @@ import { toast } from "sonner";
 import Navbar from "@/components/layout/navbar";
 import Footer from "@/components/layout/footer";
 import WaveDivider from "@/components/ui/wave-divider";
+import PageHeader from "@/components/layout/page-header";
 import { Link } from "wouter";
 import { SEO } from "@/components/seo/seo";
 import { SEO_DATA } from "@/lib/seo-data";
@@ -63,23 +64,13 @@ export default function TrackOrderPage() {
       <Navbar />
 
       {/* ── HEADER ── */}
-      <section className="py-14 section-sand">
-        <div className="container mx-auto px-4 text-center">
-          <motion.div initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.5 }}>
-            <div className="flex items-center justify-center gap-4 mb-4">
-              <div className="h-1 w-12 bg-[#C89D29] sketchy-line" />
-              <Package className="h-7 w-7 text-[#C89D29]" />
-              <div className="h-1 w-12 bg-[#C89D29] sketchy-line" />
-            </div>
-            <h1 className="text-4xl sm:text-6xl font-black hieroglyph-font mb-3 section-heading">
-              {t("pages.trackOrder.heroTitle")} <span className="text-[#C89D29]">{t("pages.trackOrder.heroTitleGold")}</span>
-            </h1>
-            <p className="section-muted text-sm max-w-md mx-auto">
-              Enter your order ID and email address to track your package in real time.
-            </p>
-          </motion.div>
-        </div>
-      </section>
+      <PageHeader
+        Icon={Package}
+        title={t("pages.trackOrder.heroTitle")}
+        titleGold={t("pages.trackOrder.heroTitleGold")}
+        subtitle="Enter your order ID and email address to track your package in real time."
+        variant="sand"
+      />
 
       {/* Wave: Header → Content */}
       <WaveDivider from="sand" to="paper" variant={1} />
