@@ -7,6 +7,7 @@ import ProductCard from "@/components/product/product-card";
 import { ProductGridSkeleton } from "@/components/product/product-skeleton";
 import WaveDivider from "@/components/ui/wave-divider";
 import { CATEGORIES, FALLBACK_PRODUCTS, setProducts } from "@/lib/products-data";
+import { translations } from "@/i18n";
 import { apiClient } from "@/lib/api-client";
 import type { Product } from "@/types";
 import { SEO } from "@/components/seo/seo";
@@ -30,7 +31,8 @@ function getInitialCategory() {
 }
 
 export default function CollectionPage() {
-  const { t } = useLang();
+  const { t, lang } = useLang();
+  const collT = translations[lang].collection;
   const [category, setCategory] = useState(getInitialCategory);
   const [searchInput, setSearchInput] = useState("");
   const [loading, setLoading] = useState(true);
@@ -149,7 +151,7 @@ export default function CollectionPage() {
                     : "section-paper border-[#1B1B1B]/12 dark:border-[#FDF8EF]/12 section-faint hover:border-[#C89D29] hover:text-[#C89D29]"
                 }`}
               >
-                {cat}
+                {(collT.categories as Record<string, string>)[cat] ?? cat}
               </button>
             ))}
           </div>

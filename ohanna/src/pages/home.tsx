@@ -146,12 +146,16 @@ export default function HomePage() {
             transition={{ delay: 0.3, duration: 0.6 }}
             className="relative hidden lg:block"
           >
-            <div className="relative rounded-2xl overflow-hidden shadow-2xl border border-[#C89D29]/20"
+            <div className="relative rounded-2xl overflow-hidden shadow-2xl border border-[#C89D29]/30"
               style={{ height: 420 }}>
-              <BrandHeroVisual />
-              {/* Sketch overlay at bottom */}
-              <div className="absolute bottom-0 left-0 right-0 h-24 bg-gradient-to-t from-[#E4D5B7]/80 to-transparent flex items-end justify-center pb-3">
-                <span className="text-[10px] font-black hieroglyph-font text-[#1B1B1B]/50 tracking-widest">ANCIENT POWER · MODERN FORM</span>
+              <img
+                src="/streetwear-egyptian-sketch.png"
+                alt="OHANNA Egyptian Streetwear"
+                className="w-full h-full object-cover object-center"
+                loading="eager"
+              />
+              <div className="absolute bottom-0 left-0 right-0 h-20 bg-gradient-to-t from-[#1B1B1B]/70 to-transparent flex items-end justify-center pb-3">
+                <span className="text-[10px] font-black hieroglyph-font text-[#C89D29] tracking-widest">ANCIENT POWER · MODERN FORM</span>
               </div>
             </div>
             <motion.div
@@ -239,23 +243,8 @@ export default function HomePage() {
             </FadeUp>
 
             <FadeUp delay={0.15} className="relative hidden lg:block">
-              {/* Egyptian streetwear sketch illustration */}
-              <div className="sketchy-border-thick section-paper p-4 transform -rotate-2 shadow-[8px_8px_0_rgba(27,27,27,0.2)] dark:shadow-[8px_8px_0_rgba(0,0,0,0.4)]">
-                <img
-                  src="/streetwear-egyptian-sketch.png"
-                  alt="OHANNA Egyptian streetwear sketch"
-                  className="w-full h-auto sketchy-border"
-                  loading="lazy"
-                />
-              </div>
-              {/* Timeline strip underneath */}
-              <div className="mt-3 rounded-lg overflow-hidden opacity-70">
-                <img
-                  src="/egyptian-streetwear-timeline.png"
-                  alt="OHANNA heritage timeline"
-                  className="w-full h-auto"
-                  loading="lazy"
-                />
+              <div className="relative rounded-2xl overflow-hidden shadow-2xl border border-[#C89D29]/20" style={{ height: 420 }}>
+                <BrandHeroVisual />
               </div>
             </FadeUp>
           </div>
