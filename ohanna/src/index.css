@@ -59,7 +59,8 @@
   --sidebar-ring: 41 56% 48%;
 
   --app-font-sans: 'Barlow', system-ui, sans-serif;
-  --app-font-arabic: 'Cairo', system-ui, sans-serif;
+  --app-font-arabic: 'Tajawal', 'Cairo', system-ui, sans-serif;
+  --app-font-arabic-display: 'El Messiri', 'Cairo', system-ui, sans-serif;
   --app-font-serif: 'Cinzel', Georgia, serif;
   --app-font-mono: Menlo, monospace;
   --radius: 0.5rem;
@@ -156,6 +157,24 @@
   body.font-arabic {
     font-family: var(--app-font-arabic);
   }
+}
+
+/* Arabic overrides: display/hieroglyph font swaps to El Messiri */
+[dir="rtl"] .hieroglyph-font,
+[dir="rtl"] .brand-font {
+  font-family: var(--app-font-arabic-display);
+  letter-spacing: 0;
+}
+
+/* All text in RTL gets Tajawal as base */
+[dir="rtl"] * {
+  font-family: var(--app-font-arabic);
+}
+
+/* Keep decorative/icon elements from inheriting */
+[dir="rtl"] .hieroglyph-font,
+[dir="rtl"] .brand-font {
+  font-family: var(--app-font-arabic-display);
 }
 
 /* ===== OHANNA SECTION BACKGROUNDS (theme-aware) ===== */

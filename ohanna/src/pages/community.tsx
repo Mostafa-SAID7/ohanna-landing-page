@@ -1,6 +1,7 @@
 import Navbar from "@/components/layout/navbar";
 import Footer from "@/components/layout/footer";
 import { Users, Star } from "lucide-react";
+import PageHeader from "@/components/layout/page-header";
 import { Link } from "wouter";
 import WaveDivider from "@/components/ui/wave-divider";
 import { SEO } from "@/components/seo/seo";
@@ -27,17 +28,13 @@ export default function CommunityPage() {
       <Navbar />
 
       {/* ── HERO ── */}
-      <section className="py-20 section-ink text-[#FDF8EF] text-center">
-        <div className="container mx-auto px-4">
-          <Users className="h-12 w-12 text-[#C89D29] mx-auto mb-6" />
-          <h1 className="text-5xl sm:text-7xl font-black hieroglyph-font mb-6">
-            {t("pages.community.heroTitle")} <span className="text-[#C89D29]">{t("pages.community.heroTitleGold")}</span>
-          </h1>
-          <p className="text-[#FDF8EF]/70 text-lg max-w-2xl mx-auto leading-relaxed">
-            {t("pages.community.heroDesc")}
-          </p>
-        </div>
-      </section>
+      <PageHeader
+        Icon={Users}
+        title={t("pages.community.heroTitle")}
+        titleGold={t("pages.community.heroTitleGold")}
+        subtitle={t("pages.community.heroDesc")}
+        variant="ink"
+      />
 
       {/* Wave: Hero → Stats */}
       <WaveDivider from="ink" to="gold" variant={1} />

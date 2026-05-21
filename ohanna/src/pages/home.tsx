@@ -11,7 +11,7 @@ import WaveDivider from "@/components/ui/wave-divider";
 import ProductCard from "@/components/product/product-card";
 import Navbar from "@/components/layout/navbar";
 import Footer from "@/components/layout/footer";
-// import ThreeScene from "@/components/three/ThreeScene";
+import BrandHeroVisual from "@/components/brand/BrandHeroVisual";
 import { SEO } from "@/components/seo/seo";
 import { SEO_DATA } from "@/lib/seo-data";
 import { PRODUCTS } from "@/lib/products-data";
@@ -21,15 +21,6 @@ import { translations } from "@/i18n";
 const FEATURED = PRODUCTS.filter((p) =>
   p.badge && ["BESTSELLER", "NEW", "LIMITED"].includes(p.badge)
 ).slice(0, 3);
-
-const TESTIMONIALS = [
-  { name: "MAYA K.", location: "Cairo", quote: "Ohanna makes me feel like a modern Cleopatra ruling the streets!", rating: 5 },
-  { name: "ARJUN S.", location: "Alexandria", quote: "The Horus hoodie is pure fire. Ancient power meets street credibility.", rating: 5 },
-  { name: "PRIYA M.", location: "Luxor", quote: "Finally, fashion that represents my heritage with modern attitude.", rating: 5 },
-  { name: "ROHIT T.", location: "Giza", quote: "Wearing Ohanna is like carrying the power of pharaohs in my DNA.", rating: 5 },
-  { name: "KAVYA R.", location: "Aswan", quote: "The quality and cultural depth of Ohanna is unmatched.", rating: 5 },
-  { name: "SARA M.", location: "Hurghada", quote: "Ancient symbols, modern rebellion. This is my uniform.", rating: 5 },
-];
 
 function FadeUp({ children, delay = 0, className = "" }: { children: React.ReactNode; delay?: number; className?: string }) {
   const ref = useRef(null);
@@ -148,18 +139,23 @@ export default function HomePage() {
             </motion.div>
           </div>
 
+          {/* ── Hero Panel ── */}
           <motion.div
             initial={{ opacity: 0, x: 30 }}
             animate={{ opacity: 1, x: 0 }}
             transition={{ delay: 0.3, duration: 0.6 }}
-            className="relative hidden lg:block"
+            className="relative hidden lg:flex items-stretch"
           >
-            <div className="relative hidden lg:block">
-              <img 
-                src="/egyptian-streetwear-timeline.png" 
-                alt="Egyptian Streetwear" 
-                className="w-full h-auto rounded-lg shadow-2xl"
+            <div className="relative w-full rounded-2xl overflow-hidden shadow-2xl border border-[#C89D29]/30 min-h-[520px]">
+              <img
+                src="/streetwear-egyptian-sketch.png"
+                alt="OHANNA Egyptian Streetwear"
+                className="absolute inset-0 w-full h-full object-cover object-top"
+                loading="eager"
               />
+              <div className="absolute bottom-0 left-0 right-0 h-24 bg-gradient-to-t from-[#1B1B1B]/75 to-transparent flex items-end justify-center pb-3">
+                <span className="text-[10px] font-black hieroglyph-font text-[#C89D29] tracking-widest">ANCIENT POWER · MODERN FORM</span>
+              </div>
             </div>
             <motion.div
               animate={{ rotate: ["12deg", "16deg", "12deg"] }}
@@ -246,12 +242,19 @@ export default function HomePage() {
             </FadeUp>
 
             <FadeUp delay={0.15} className="relative hidden lg:block">
-              <div className="sketchy-border-thick section-paper p-4 transform -rotate-2 shadow-[8px_8px_0_rgba(27,27,27,0.2)] dark:shadow-[8px_8px_0_rgba(0,0,0,0.4)]">
+              <div className="relative w-full rounded-2xl overflow-hidden shadow-2xl border border-[#C89D29]/20 min-h-[480px]">
                 <img
                   src="/egyptian-streetwear-timeline.png"
-                  alt="OHANNA heritage timeline"
-                  className="w-full h-auto sketchy-border"
+                  alt="The OHANNA Legacy"
+                  className="absolute inset-0 w-full h-full object-cover object-center"
+                  loading="lazy"
                 />
+                <div className="absolute inset-0 bg-gradient-to-t from-[#1B1B1B]/50 via-transparent to-transparent" />
+                <div className="absolute bottom-4 left-4 right-4 flex items-center gap-3">
+                  <div className="h-px flex-1 bg-[#C89D29]/50" />
+                  <span className="text-[10px] font-black hieroglyph-font text-[#C89D29] tracking-widest whitespace-nowrap">5000 YEARS OF LEGACY</span>
+                  <div className="h-px flex-1 bg-[#C89D29]/50" />
+                </div>
               </div>
             </FadeUp>
           </div>
@@ -274,18 +277,18 @@ export default function HomePage() {
           </FadeUp>
 
           <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-5">
-            {TESTIMONIALS.map((testimonial, i) => (
+            {homeT.testimonials.map((testimonial, i) => (
               <FadeUp key={i} delay={i * 0.07}>
                 <div className="section-paper rounded-2xl border border-[#FDF8EF]/20 dark:border-[#FDF8EF]/10 p-5 h-full shadow-lg">
                   <div className="flex text-[#C89D29] mb-3">
-                    {[...Array(testimonial.rating)].map((_, j) => (
+                    {[...Array(5)].map((_, j) => (
                       <Star key={j} className="h-3.5 w-3.5 fill-current" />
                     ))}
                   </div>
                   <p className="text-sm section-muted italic mb-4 leading-relaxed">"{testimonial.quote}"</p>
                   <div>
                     <p className="font-black hieroglyph-font text-xs section-heading">{testimonial.name}</p>
-                    <p className="text-xs section-faint">{testimonial.location}, Egypt</p>
+                    <p className="text-xs section-faint">{testimonial.location}</p>
                   </div>
                 </div>
               </FadeUp>
