@@ -1,4 +1,4 @@
-import { useRef } from "react";
+import { useRef, Suspense, lazy, Component, type ReactNode } from "react";
 import { Link } from "wouter";
 import { motion, useInView } from "framer-motion";
 import {
@@ -11,7 +11,7 @@ import WaveDivider from "@/components/ui/wave-divider";
 import ProductCard from "@/components/product/product-card";
 import Navbar from "@/components/layout/navbar";
 import Footer from "@/components/layout/footer";
-// import ThreeScene from "@/components/three/ThreeScene";
+const ThreeScene = lazy(() => import("@/components/three/ThreeScene"));
 import { SEO } from "@/components/seo/seo";
 import { SEO_DATA } from "@/lib/seo-data";
 import { PRODUCTS } from "@/lib/products-data";
@@ -30,6 +30,24 @@ const TESTIMONIALS = [
   { name: "KAVYA R.", location: "Aswan", quote: "The quality and cultural depth of Ohanna is unmatched.", rating: 5 },
   { name: "SARA M.", location: "Hurghada", quote: "Ancient symbols, modern rebellion. This is my uniform.", rating: 5 },
 ];
+
+class ThreeErrorBoundary extends Component<{ children: ReactNode }, { failed: boolean }> {
+  state = { failed: false };
+  static getDerivedStateFromError() { return { failed: true }; }
+  render() {
+    if (this.state.failed) {
+      return (
+        <img
+          src="/streetwear-egyptian-sketch.png"
+          alt="Egyptian Streetwear"
+          className="w-full h-full object-cover"
+          loading="eager"
+        />
+      );
+    }
+    return this.props.children;
+  }
+}
 
 function FadeUp({ children, delay = 0, className = "" }: { children: React.ReactNode; delay?: number; className?: string }) {
   const ref = useRef(null);
@@ -148,18 +166,31 @@ export default function HomePage() {
             </motion.div>
           </div>
 
+          {/* ── 3D Hero Panel ── */}
           <motion.div
             initial={{ opacity: 0, x: 30 }}
             animate={{ opacity: 1, x: 0 }}
             transition={{ delay: 0.3, duration: 0.6 }}
             className="relative hidden lg:block"
           >
-            <div className="relative hidden lg:block">
-              <img 
-                src="/egyptian-streetwear-timeline.png" 
-                alt="Egyptian Streetwear" 
-                className="w-full h-auto rounded-lg shadow-2xl"
-              />
+            <div className="relative rounded-2xl overflow-hidden shadow-2xl border border-[#C89D29]/20"
+              style={{ height: 420 }}>
+              <ThreeErrorBoundary>
+                <Suspense fallback={
+                  <img
+                    src="/streetwear-egyptian-sketch.png"
+                    alt="Egyptian Streetwear"
+                    className="w-full h-full object-cover"
+                    loading="eager"
+                  />
+                }>
+                  <ThreeScene />
+                </Suspense>
+              </ThreeErrorBoundary>
+              {/* Sketch overlay at bottom */}
+              <div className="absolute bottom-0 left-0 right-0 h-24 bg-gradient-to-t from-[#E4D5B7]/80 to-transparent flex items-end justify-center pb-3">
+                <span className="text-[10px] font-black hieroglyph-font text-[#1B1B1B]/50 tracking-widest">ANCIENT POWER · MODERN FORM</span>
+              </div>
             </div>
             <motion.div
               animate={{ rotate: ["12deg", "16deg", "12deg"] }}
@@ -246,11 +277,22 @@ export default function HomePage() {
             </FadeUp>
 
             <FadeUp delay={0.15} className="relative hidden lg:block">
+              {/* Egyptian streetwear sketch illustration */}
               <div className="sketchy-border-thick section-paper p-4 transform -rotate-2 shadow-[8px_8px_0_rgba(27,27,27,0.2)] dark:shadow-[8px_8px_0_rgba(0,0,0,0.4)]">
+                <img
+                  src="/streetwear-egyptian-sketch.png"
+                  alt="OHANNA Egyptian streetwear sketch"
+                  className="w-full h-auto sketchy-border"
+                  loading="lazy"
+                />
+              </div>
+              {/* Timeline strip underneath */}
+              <div className="mt-3 rounded-lg overflow-hidden opacity-70">
                 <img
                   src="/egyptian-streetwear-timeline.png"
                   alt="OHANNA heritage timeline"
-                  className="w-full h-auto sketchy-border"
+                  className="w-full h-auto"
+                  loading="lazy"
                 />
               </div>
             </FadeUp>

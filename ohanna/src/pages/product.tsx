@@ -80,6 +80,9 @@ export default function ProductPage({ id }: { id: string }) {
                     src={product.imageUrl}
                     alt={`${product.name} — OHANNA Egyptian Streetwear`}
                     className="w-full h-full object-cover"
+                    loading="eager"
+                    fetchPriority="high"
+                    decoding="sync"
                   />
                   {product.badge && (
                     <span className={`absolute top-4 left-4 text-xs font-black px-3 py-1.5 rounded-md ${BADGE_STYLES[product.badge] ?? "bg-[#1B1B1B] text-[#FDF8EF]"}`}>

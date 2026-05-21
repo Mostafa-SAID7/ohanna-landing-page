@@ -7,6 +7,7 @@ import { cart } from "./cart";
 import { faq } from "./faq";
 import { contact } from "./contact";
 import { pages } from "./pages";
+import { footer } from "./footer";
 
 export const translations = {
   en: {
@@ -19,6 +20,7 @@ export const translations = {
     faq: faq.en,
     contact: contact.en,
     pages: pages.en,
+    footer: footer.en,
   },
   ar: {
     nav: nav.ar,
@@ -30,6 +32,7 @@ export const translations = {
     faq: faq.ar,
     contact: contact.ar,
     pages: pages.ar,
+    footer: footer.ar,
   },
 } as const;
 

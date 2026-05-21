@@ -6,7 +6,7 @@ import Footer from "@/components/layout/footer";
 import ProductCard from "@/components/product/product-card";
 import { ProductGridSkeleton } from "@/components/product/product-skeleton";
 import WaveDivider from "@/components/ui/wave-divider";
-import { CATEGORIES, getProductsByCategory, setProducts } from "@/lib/products-data";
+import { CATEGORIES, FALLBACK_PRODUCTS, setProducts } from "@/lib/products-data";
 import { apiClient } from "@/lib/api-client";
 import type { Product } from "@/types";
 import { SEO } from "@/components/seo/seo";
@@ -35,15 +35,17 @@ export default function CollectionPage() {
   const [searchInput, setSearchInput] = useState("");
   const [loading, setLoading] = useState(true);
   const [page, setPage] = useState(1);
-  const [products, setLocalProducts] = useState<Product[]>([]);
+  const [products, setLocalProducts] = useState<Product[]>(FALLBACK_PRODUCTS);
 
   useEffect(() => {
     const fetchProducts = async () => {
       setLoading(true);
       try {
         const data = await apiClient.products.list();
-        setLocalProducts(data);
-        setProducts(data);
+        if (data && data.length > 0) {
+          setLocalProducts(data);
+          setProducts(data);
+        }
       } catch (err) {
         console.error("Failed to fetch products:", err);
       } finally {
@@ -56,7 +58,9 @@ export default function CollectionPage() {
   const debouncedSearch = useDebounce(searchInput, 300);
 
   const filtered = useMemo<Product[]>(() => {
-    let results = getProductsByCategory(category);
+    let results = category === "All"
+      ? products
+      : products.filter((p) => p.category === category);
     if (debouncedSearch.trim()) {
       const q = debouncedSearch.toLowerCase();
       results = results.filter(
@@ -67,16 +71,10 @@ export default function CollectionPage() {
       );
     }
     return results;
-  }, [category, debouncedSearch]);
+  }, [category, debouncedSearch, products]);
 
   const totalPages = Math.max(1, Math.ceil(filtered.length / PAGE_SIZE));
   const paginated = filtered.slice((page - 1) * PAGE_SIZE, page * PAGE_SIZE);
-
-  useEffect(() => {
-    setLoading(true);
-    const timer = setTimeout(() => setLoading(false), 250);
-    return () => clearTimeout(timer);
-  }, [category, debouncedSearch]);
 
   useEffect(() => {
     setPage(1);

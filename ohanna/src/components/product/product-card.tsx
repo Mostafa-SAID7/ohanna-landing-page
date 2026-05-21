@@ -43,6 +43,8 @@ export default function ProductCard({ product, index = 0 }: { product: Product; 
             src={imgError ? "/placeholder.jpg" : product.imageUrl}
             alt={`${product.name} — OHANNA Egyptian Streetwear`}
             className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105"
+            loading="lazy"
+            decoding="async"
             onError={() => setImgError(true)}
           />
         </div>

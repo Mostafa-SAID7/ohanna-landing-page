@@ -1,32 +1,34 @@
 import { Link } from "wouter";
 import { Eye, MapPin, Mail, Clock } from "lucide-react";
-
-const COLLECTION_LINKS = [
-  { label: "Hoodies", href: "/collection?category=Hoodies" },
-  { label: "T-Shirts", href: "/collection?category=T-Shirts" },
-  { label: "Jackets", href: "/collection?category=Jackets" },
-  { label: "Bottoms", href: "/collection?category=Bottoms" },
-  { label: "Accessories", href: "/collection?category=Accessories" },
-];
-
-const SUPPORT_LINKS = [
-  { label: "Size Guide", href: "/size-guide" },
-  { label: "Shipping & Returns", href: "/shipping" },
-  { label: "FAQs", href: "/faq" },
-  { label: "Contact Us", href: "/contact" },
-  { label: "Track Order", href: "/track-order" },
-];
-
-const DISCOVER_LINKS = [
-  { label: "Our Story", href: "/story" },
-  { label: "Egyptian Culture", href: "/culture" },
-  { label: "The Collection", href: "/collection" },
-  { label: "Community", href: "/community" },
-  { label: "Careers", href: "/careers" },
-];
+import { useLang } from "@/contexts/lang-context";
 
 export default function Footer() {
   const year = new Date().getFullYear();
+  const { t } = useLang();
+
+  const COLLECTION_LINKS = [
+    { labelKey: "footer.links.hoodies", href: "/collection?category=Hoodies" },
+    { labelKey: "footer.links.tshirts", href: "/collection?category=T-Shirts" },
+    { labelKey: "footer.links.jackets", href: "/collection?category=Jackets" },
+    { labelKey: "footer.links.bottoms", href: "/collection?category=Bottoms" },
+    { labelKey: "footer.links.accessories", href: "/collection?category=Accessories" },
+  ];
+
+  const SUPPORT_LINKS = [
+    { labelKey: "footer.links.sizeGuide", href: "/size-guide" },
+    { labelKey: "footer.links.shippingReturns", href: "/shipping" },
+    { labelKey: "footer.links.faqs", href: "/faq" },
+    { labelKey: "footer.links.contactUs", href: "/contact" },
+    { labelKey: "footer.links.trackOrder", href: "/track-order" },
+  ];
+
+  const DISCOVER_LINKS = [
+    { labelKey: "footer.links.ourStory", href: "/story" },
+    { labelKey: "footer.links.egyptianCulture", href: "/culture" },
+    { labelKey: "footer.links.theCollection", href: "/collection" },
+    { labelKey: "footer.links.community", href: "/community" },
+    { labelKey: "footer.links.careers", href: "/careers" },
+  ];
 
   return (
     <footer className="bg-[#1B1B1B] dark:bg-[#0D0B09] text-[#FDF8EF]">
@@ -38,12 +40,12 @@ export default function Footer() {
               <span className="text-xl font-black hieroglyph-font text-[#FDF8EF]">OHANNA</span>
             </Link>
             <p className="text-[#FDF8EF]/55 text-sm leading-relaxed">
-              Egypt's premier streetwear brand. Where 5,000 years of pharaonic heritage meets modern street rebellion. Premium Egyptian apparel, crafted for the culture.
+              {t("footer.tagline")}
             </p>
             <div className="space-y-2 text-xs text-[#FDF8EF]/40">
               <div className="flex items-center gap-2">
                 <MapPin className="h-3.5 w-3.5 text-[#C89D29] shrink-0" />
-                <span>Maadi, Cairo, Egypt</span>
+                <span>{t("footer.location")}</span>
               </div>
               <div className="flex items-center gap-2">
                 <Mail className="h-3.5 w-3.5 text-[#C89D29] shrink-0" />
@@ -53,7 +55,7 @@ export default function Footer() {
               </div>
               <div className="flex items-center gap-2">
                 <Clock className="h-3.5 w-3.5 text-[#C89D29] shrink-0" />
-                <span>Sun–Thu 10am–8pm EET</span>
+                <span>{t("footer.hours")}</span>
               </div>
             </div>
             <div className="flex gap-3 pt-1">
@@ -66,13 +68,13 @@ export default function Footer() {
           </div>
 
           <div>
-            <h4 className="hieroglyph-font text-xs text-[#C89D29] mb-5 tracking-widest">COLLECTION</h4>
+            <h4 className="hieroglyph-font text-xs text-[#C89D29] mb-5 tracking-widest">{t("footer.collectionTitle")}</h4>
             <ul className="space-y-3">
               {COLLECTION_LINKS.map((l) => (
-                <li key={l.label}>
+                <li key={l.labelKey}>
                   <Link href={l.href} className="text-[#FDF8EF]/55 hover:text-[#C89D29] transition-colors text-sm flex items-center gap-1.5 group">
                     <span className="w-1 h-1 rounded-full bg-[#C89D29]/30 group-hover:bg-[#C89D29] transition-colors" />
-                    {l.label}
+                    {t(l.labelKey)}
                   </Link>
                 </li>
               ))}
@@ -80,13 +82,13 @@ export default function Footer() {
           </div>
 
           <div>
-            <h4 className="hieroglyph-font text-xs text-[#C89D29] mb-5 tracking-widest">SUPPORT</h4>
+            <h4 className="hieroglyph-font text-xs text-[#C89D29] mb-5 tracking-widest">{t("footer.supportTitle")}</h4>
             <ul className="space-y-3">
               {SUPPORT_LINKS.map((l) => (
-                <li key={l.label}>
+                <li key={l.labelKey}>
                   <Link href={l.href} className="text-[#FDF8EF]/55 hover:text-[#C89D29] transition-colors text-sm flex items-center gap-1.5 group">
                     <span className="w-1 h-1 rounded-full bg-[#C89D29]/30 group-hover:bg-[#C89D29] transition-colors" />
-                    {l.label}
+                    {t(l.labelKey)}
                   </Link>
                 </li>
               ))}
@@ -94,13 +96,13 @@ export default function Footer() {
           </div>
 
           <div>
-            <h4 className="hieroglyph-font text-xs text-[#C89D29] mb-5 tracking-widest">DISCOVER</h4>
+            <h4 className="hieroglyph-font text-xs text-[#C89D29] mb-5 tracking-widest">{t("footer.discoverTitle")}</h4>
             <ul className="space-y-3">
               {DISCOVER_LINKS.map((l) => (
-                <li key={l.label}>
+                <li key={l.labelKey}>
                   <Link href={l.href} className="text-[#FDF8EF]/55 hover:text-[#C89D29] transition-colors text-sm flex items-center gap-1.5 group">
                     <span className="w-1 h-1 rounded-full bg-[#C89D29]/30 group-hover:bg-[#C89D29] transition-colors" />
-                    {l.label}
+                    {t(l.labelKey)}
                   </Link>
                 </li>
               ))}
@@ -112,10 +114,10 @@ export default function Footer() {
       <div className="py-6">
         <div className="container mx-auto px-4 flex flex-col sm:flex-row items-center justify-between gap-3">
           <p className="text-[#FDF8EF]/30 text-xs text-center sm:text-left">
-            © {year} OHANNA Egyptian Streetwear. All rights reserved. Ancient heritage, modern rebellion.
+            © {year} {t("footer.copyright")}
           </p>
           <p className="text-[#FDF8EF]/20 text-xs text-center">
-            Egyptian Pound (EGP) · Secure payments · Made in Egypt 🇪🇬
+            {t("footer.payments")}
           </p>
         </div>
       </div>
