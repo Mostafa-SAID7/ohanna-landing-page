@@ -11,7 +11,7 @@ import WaveDivider from "@/components/ui/wave-divider";
 import ProductCard from "@/components/product/product-card";
 import Navbar from "@/components/layout/navbar";
 import Footer from "@/components/layout/footer";
-import ThreeScene from "@/components/three/ThreeScene";
+// import ThreeScene from "@/components/three/ThreeScene";
 import { SEO } from "@/components/seo/seo";
 import { SEO_DATA } from "@/lib/seo-data";
 import { PRODUCTS } from "@/lib/products-data";
@@ -155,7 +155,11 @@ export default function HomePage() {
             className="relative hidden lg:block"
           >
             <div className="relative hidden lg:block">
-              <ThreeScene />
+              <img 
+                src="/egyptian-streetwear-timeline.png" 
+                alt="Egyptian Streetwear" 
+                className="w-full h-auto rounded-lg shadow-2xl"
+              />
             </div>
             <motion.div
               animate={{ rotate: ["12deg", "16deg", "12deg"] }}

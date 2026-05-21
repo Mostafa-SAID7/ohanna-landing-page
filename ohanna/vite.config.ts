@@ -12,17 +12,10 @@ export default defineConfig({
     },
     dedupe: ["react", "react-dom"],
   },
-  optimizeDeps: {
-    include: ["three", "@react-three/fiber", "@react-three/drei"],
-    exclude: [],
-  },
   root: path.resolve(import.meta.dirname),
   build: {
     outDir: path.resolve(import.meta.dirname, "dist"),
     emptyOutDir: true,
-    commonjsOptions: {
-      include: [/three/, /node_modules/],
-    },
   },
   server: {
     port,
