@@ -27,6 +27,14 @@ export const home = {
     ctaTitle1: "CLAIM YOUR",
     ctaTitle2: "PHARAOH STATUS",
     joinCommunity: "JOIN COMMUNITY",
+    testimonials: [
+      { name: "MAYA K.", location: "Cairo", quote: "Ohanna makes me feel like a modern Cleopatra ruling the streets!" },
+      { name: "ARJUN S.", location: "Alexandria", quote: "The Horus hoodie is pure fire. Ancient power meets street credibility." },
+      { name: "PRIYA M.", location: "Luxor", quote: "Finally, fashion that represents my heritage with modern attitude." },
+      { name: "ROHIT T.", location: "Giza", quote: "Wearing Ohanna is like carrying the power of pharaohs in my DNA." },
+      { name: "KAVYA R.", location: "Aswan", quote: "The quality and cultural depth of Ohanna is unmatched." },
+      { name: "SARA M.", location: "Hurghada", quote: "Ancient symbols, modern rebellion. This is my uniform." },
+    ],
   },
   ar: {
     badge: "القوة القديمة",
@@ -56,5 +64,13 @@ export const home = {
     ctaTitle1: "احصل على",
     ctaTitle2: "مكانة الفرعون",
     joinCommunity: "انضم للمجتمع",
+    testimonials: [
+      { name: "مايا ك.", location: "القاهرة", quote: "أوهانا تجعلني أشعر كأنني كليوباترا عصرية تحكم الشوارع!" },
+      { name: "أرجون س.", location: "الإسكندرية", quote: "هودي حورس قمة في الروعة. القوة القديمة تلتقي بمصداقية الشارع." },
+      { name: "بريا م.", location: "الأقصر", quote: "أخيراً، موضة تمثل تراثي بأسلوب عصري حقيقي." },
+      { name: "روهيت ت.", location: "الجيزة", quote: "ارتداء أوهانا يشعرني كأنني أحمل قوة الفراعنة في دمي." },
+      { name: "كافيا ر.", location: "أسوان", quote: "الجودة والعمق الثقافي في أوهانا لا مثيل لهما." },
+      { name: "سارة م.", location: "الغردقة", quote: "رموز قديمة، تمرد حديث. هذا هو زيّ الموقف الحقيقي." },
+    ],
   },
 } as const;

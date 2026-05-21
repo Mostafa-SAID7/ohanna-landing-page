@@ -1,4 +1,4 @@
-import { useRef, Suspense, lazy, Component, type ReactNode } from "react";
+import { useRef } from "react";
 import { Link } from "wouter";
 import { motion, useInView } from "framer-motion";
 import {
@@ -11,7 +11,7 @@ import WaveDivider from "@/components/ui/wave-divider";
 import ProductCard from "@/components/product/product-card";
 import Navbar from "@/components/layout/navbar";
 import Footer from "@/components/layout/footer";
-const ThreeScene = lazy(() => import("@/components/three/ThreeScene"));
+import BrandHeroVisual from "@/components/brand/BrandHeroVisual";
 import { SEO } from "@/components/seo/seo";
 import { SEO_DATA } from "@/lib/seo-data";
 import { PRODUCTS } from "@/lib/products-data";
@@ -21,33 +21,6 @@ import { translations } from "@/i18n";
 const FEATURED = PRODUCTS.filter((p) =>
   p.badge && ["BESTSELLER", "NEW", "LIMITED"].includes(p.badge)
 ).slice(0, 3);
-
-const TESTIMONIALS = [
-  { name: "MAYA K.", location: "Cairo", quote: "Ohanna makes me feel like a modern Cleopatra ruling the streets!", rating: 5 },
-  { name: "ARJUN S.", location: "Alexandria", quote: "The Horus hoodie is pure fire. Ancient power meets street credibility.", rating: 5 },
-  { name: "PRIYA M.", location: "Luxor", quote: "Finally, fashion that represents my heritage with modern attitude.", rating: 5 },
-  { name: "ROHIT T.", location: "Giza", quote: "Wearing Ohanna is like carrying the power of pharaohs in my DNA.", rating: 5 },
-  { name: "KAVYA R.", location: "Aswan", quote: "The quality and cultural depth of Ohanna is unmatched.", rating: 5 },
-  { name: "SARA M.", location: "Hurghada", quote: "Ancient symbols, modern rebellion. This is my uniform.", rating: 5 },
-];
-
-class ThreeErrorBoundary extends Component<{ children: ReactNode }, { failed: boolean }> {
-  state = { failed: false };
-  static getDerivedStateFromError() { return { failed: true }; }
-  render() {
-    if (this.state.failed) {
-      return (
-        <img
-          src="/streetwear-egyptian-sketch.png"
-          alt="Egyptian Streetwear"
-          className="w-full h-full object-cover"
-          loading="eager"
-        />
-      );
-    }
-    return this.props.children;
-  }
-}
 
 function FadeUp({ children, delay = 0, className = "" }: { children: React.ReactNode; delay?: number; className?: string }) {
   const ref = useRef(null);
@@ -175,18 +148,7 @@ export default function HomePage() {
           >
             <div className="relative rounded-2xl overflow-hidden shadow-2xl border border-[#C89D29]/20"
               style={{ height: 420 }}>
-              <ThreeErrorBoundary>
-                <Suspense fallback={
-                  <img
-                    src="/streetwear-egyptian-sketch.png"
-                    alt="Egyptian Streetwear"
-                    className="w-full h-full object-cover"
-                    loading="eager"
-                  />
-                }>
-                  <ThreeScene />
-                </Suspense>
-              </ThreeErrorBoundary>
+              <BrandHeroVisual />
               {/* Sketch overlay at bottom */}
               <div className="absolute bottom-0 left-0 right-0 h-24 bg-gradient-to-t from-[#E4D5B7]/80 to-transparent flex items-end justify-center pb-3">
                 <span className="text-[10px] font-black hieroglyph-font text-[#1B1B1B]/50 tracking-widest">ANCIENT POWER · MODERN FORM</span>
@@ -316,18 +278,18 @@ export default function HomePage() {
           </FadeUp>
 
           <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-5">
-            {TESTIMONIALS.map((testimonial, i) => (
+            {homeT.testimonials.map((testimonial, i) => (
               <FadeUp key={i} delay={i * 0.07}>
                 <div className="section-paper rounded-2xl border border-[#FDF8EF]/20 dark:border-[#FDF8EF]/10 p-5 h-full shadow-lg">
                   <div className="flex text-[#C89D29] mb-3">
-                    {[...Array(testimonial.rating)].map((_, j) => (
+                    {[...Array(5)].map((_, j) => (
                       <Star key={j} className="h-3.5 w-3.5 fill-current" />
                     ))}
                   </div>
                   <p className="text-sm section-muted italic mb-4 leading-relaxed">"{testimonial.quote}"</p>
                   <div>
                     <p className="font-black hieroglyph-font text-xs section-heading">{testimonial.name}</p>
-                    <p className="text-xs section-faint">{testimonial.location}, Egypt</p>
+                    <p className="text-xs section-faint">{testimonial.location}</p>
                   </div>
                 </div>
               </FadeUp>

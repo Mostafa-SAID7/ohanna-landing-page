@@ -58,13 +58,6 @@ export default function Footer() {
                 <span>{t("footer.hours")}</span>
               </div>
             </div>
-            <div className="flex gap-3 pt-1">
-              {["𓂀", "𓅃", "𓋹", "𓊖"].map((g, i) => (
-                <span key={i} className="text-[#C89D29]/50 text-lg hover:text-[#C89D29] transition-colors cursor-default select-none">
-                  {g}
-                </span>
-              ))}
-            </div>
           </div>
 
           <div>
@@ -112,8 +105,15 @@ export default function Footer() {
       </div>
 
       <div className="py-6">
-        <div className="container mx-auto px-4 flex flex-col sm:flex-row items-center justify-between gap-3">
-          <p className="text-[#FDF8EF]/30 text-xs text-center sm:text-left">
+        <div className="container mx-auto px-4 flex flex-col items-center gap-4">
+          <div className="flex items-center justify-center gap-5">
+            {["𓂀", "𓅃", "𓋹", "𓊖"].map((g, i) => (
+              <span key={i} className="text-[#C89D29]/50 text-2xl hover:text-[#C89D29] transition-colors cursor-default select-none">
+                {g}
+              </span>
+            ))}
+          </div>
+          <p className="text-[#FDF8EF]/30 text-xs text-center">
             © {year} {t("footer.copyright")}
           </p>
           <p className="text-[#FDF8EF]/20 text-xs text-center">
