@@ -63911,6 +63911,59 @@ router2.post(
     res.json({ url: urlWithDetails, sessionId, orderId });
   })
 );
+router2.get(
+  "/track-order",
+  asyncHandler(async (req, res) => {
+    const orderId = ensureString(req.query.id);
+    const email = ensureString(req.query.email);
+    if (!orderId || !email) {
+      res.status(400).json({ error: "Order ID and email are required" });
+      return;
+    }
+    try {
+      const orders = await orderQueries.getAll();
+      const order = orders.find(
+        (o) => (o.id === orderId || o.stripeSessionId === orderId) && o.customerEmail.toLowerCase() === email.toLowerCase().trim()
+      );
+      if (order) {
+        res.json({
+          order: {
+            id: order.id || orderId,
+            status: order.status || "pending",
+            total: order.total,
+            customerEmail: order.customerEmail,
+            customerName: order.customerName,
+            items: order.items,
+            createdAt: order.createdAt,
+            updatedAt: order.updatedAt
+          }
+        });
+        return;
+      }
+    } catch (err) {
+      logger.warn("Database unavailable, checking in-memory orders");
+    }
+    const memOrder = inMemoryOrders.find(
+      (o) => (o.id === orderId || o.stripeSessionId === orderId) && o.customerEmail.toLowerCase() === email.toLowerCase().trim()
+    );
+    if (memOrder) {
+      res.json({
+        order: {
+          id: memOrder.id || orderId,
+          status: memOrder.status || "pending",
+          total: memOrder.total,
+          customerEmail: memOrder.customerEmail,
+          customerName: memOrder.customerName,
+          items: memOrder.items,
+          createdAt: memOrder.createdAt,
+          updatedAt: memOrder.updatedAt
+        }
+      });
+      return;
+    }
+    res.status(404).json({ error: "Order not found" });
+  })
+);
 router2.post(
   "/contact",
   asyncHandler(async (req, res) => {

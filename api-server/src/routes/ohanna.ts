@@ -214,6 +214,76 @@ router.post(
 );
 
 /**
+ * Track order endpoint
+ */
+router.get(
+  "/track-order",
+  asyncHandler(async (req: Request, res: Response) => {
+    const orderId = ensureString(req.query.id);
+    const email = ensureString(req.query.email);
+
+    if (!orderId || !email) {
+      res.status(400).json({ error: "Order ID and email are required" });
+      return;
+    }
+
+    try {
+      // Try to find order in database
+      const orders = await orderQueries.getAll();
+      const order = orders.find(
+        (o: any) => 
+          (o.id === orderId || o.stripeSessionId === orderId) && 
+          o.customerEmail.toLowerCase() === email.toLowerCase().trim()
+      );
+
+      if (order) {
+        res.json({ 
+          order: {
+            id: order.id || orderId,
+            status: order.status || "pending",
+            total: order.total,
+            customerEmail: order.customerEmail,
+            customerName: order.customerName,
+            items: order.items,
+            createdAt: order.createdAt,
+            updatedAt: order.updatedAt,
+          }
+        });
+        return;
+      }
+    } catch (err) {
+      logger.warn("Database unavailable, checking in-memory orders");
+    }
+
+    // Check in-memory orders as fallback
+    const memOrder = inMemoryOrders.find(
+      (o: any) => 
+        (o.id === orderId || o.stripeSessionId === orderId) && 
+        o.customerEmail.toLowerCase() === email.toLowerCase().trim()
+    );
+
+    if (memOrder) {
+      res.json({ 
+        order: {
+          id: memOrder.id || orderId,
+          status: memOrder.status || "pending",
+          total: memOrder.total,
+          customerEmail: memOrder.customerEmail,
+          customerName: memOrder.customerName,
+          items: memOrder.items,
+          createdAt: memOrder.createdAt,
+          updatedAt: memOrder.updatedAt,
+        }
+      });
+      return;
+    }
+
+    // Order not found
+    res.status(404).json({ error: "Order not found" });
+  })
+);
+
+/**
  * Contact endpoint
  */
 router.post(
