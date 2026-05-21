@@ -1,99 +1,20 @@
 /**
- * API type definitions
+ * Centralized type exports
+ * Re-exports all types from domain-specific files
  */
 
-export interface ApiResponse<T> {
-  data?: T;
-  error?: string;
-  message?: string;
-}
+// Shared types
+export * from './shared.types';
 
-export interface PaginatedResponse<T> {
-  items: T[];
-  total: number;
-  page: number;
-  pageSize: number;
-  totalPages: number;
-}
+// Domain-specific types
+export * from './product.types';
+export * from './order.types';
+export * from './contact.types';
 
-export interface CheckoutRequest {
-  items: Array<{
-    product: {
-      id: string;
-      name: string;
-      price: number;
-      description?: string;
-    };
-    quantity: number;
-    size?: string;
-  }>;
-  successUrl: string;
-  cancelUrl: string;
-  customerEmail: string;
-  customerName: string;
-  shippingAddress: {
-    fullName: string;
-    email: string;
-    phone: string;
-    address: string;
-    city: string;
-    governorate: string;
-    postalCode: string;
-  };
-}
+// API-specific types
+export * from './api.types';
 
-export interface CheckoutResponse {
-  url: string;
-  sessionId: string;
-  orderId: string;
-}
-
-export interface ContactRequest {
-  name: string;
-  email: string;
-  subject?: string;
-  message: string;
-}
-
-export interface ContactResponse {
-  success: boolean;
-  message: string;
-}
-
-export interface TrackOrderRequest {
-  id: string;
-  email: string;
-}
-
-export interface TrackOrderResponse {
-  order: {
-    id: string;
-    stripeSessionId?: string;
-    customerEmail: string;
-    customerName: string;
-    shippingAddress: any;
-    items: any[];
-    total: number;
-    status: string;
-    createdAt: Date;
-    updatedAt: Date;
-  };
-}
-
-export interface ProductResponse {
-  id: string;
-  name: string;
-  description: string;
-  price: number;
-  category: string;
-  badge?: string;
-  imageUrl: string;
-  stock: number;
-  slug?: string;
-  createdAt: Date;
-  updatedAt: Date;
-}
-
-export interface ProductsListResponse {
-  products: ProductResponse[];
-}
+// Legacy exports for backward compatibility
+// TODO: Remove these after updating all imports
+export type { ProductResponse as ProductResponseLegacy } from './product.types';
+export type { OrderDetails as TrackOrderResponseOrder } from './order.types';

@@ -6,7 +6,7 @@
 import { db, contactsTable } from "../index";
 import { eq, desc } from "drizzle-orm";
 import type { InsertContact, Contact } from "../schema";
-import { randomUUID } from "crypto";
+import { generateId } from "../../lib/id-generator";
 
 export const contactQueries = {
   /**
@@ -40,7 +40,7 @@ export const contactQueries = {
    */
   async create(data: InsertContact): Promise<Contact> {
     const result = await db.insert(contactsTable).values({
-      id: randomUUID(),
+      id: generateId(),
       ...data,
     }).returning();
     return result[0];

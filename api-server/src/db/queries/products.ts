@@ -6,7 +6,7 @@
 import { db, productsTable } from "../index";
 import { eq, like, desc } from "drizzle-orm";
 import type { InsertProduct, Product } from "../schema";
-import { randomUUID } from "crypto";
+import { generateId } from "../../lib/id-generator";
 
 export const productQueries = {
   /**
@@ -59,7 +59,7 @@ export const productQueries = {
    */
   async create(data: InsertProduct): Promise<Product> {
     const result = await db.insert(productsTable).values({
-      id: randomUUID(),
+      id: generateId(),
       ...data,
     }).returning();
     return result[0];

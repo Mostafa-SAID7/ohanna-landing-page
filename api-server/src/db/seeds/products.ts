@@ -3,11 +3,11 @@
  * Initial product data for the database
  */
 
-import { randomUUID } from "crypto";
+import { generateId } from "../../lib/id-generator";
 
 export const PRODUCT_SEEDS = [
   {
-    id: randomUUID(),
+    id: generateId(),
     name: "HORUS HOODIE",
     description:
       "Oversized hoodie with the Eye of Horus embroidered across the chest. Premium 400gsm cotton blend. Ancient power meets street comfort.",
@@ -19,7 +19,7 @@ export const PRODUCT_SEEDS = [
     slug: "horus-hoodie",
   },
   {
-    id: randomUUID(),
+    id: generateId(),
     name: "ANKH TEE",
     description:
       "Relaxed fit tee with oversized Ankh symbol. Heavyweight 220gsm cotton. The symbol of eternal life on your chest.",
@@ -31,7 +31,7 @@ export const PRODUCT_SEEDS = [
     slug: "ankh-tee",
   },
   {
-    id: randomUUID(),
+    id: generateId(),
     name: "PHARAOH JACKET",
     description:
       "Bomber jacket with scarab beetle and pyramid patterns. Premium polyester with Egyptian motifs. Rule the streets like a pharaoh.",
@@ -43,7 +43,7 @@ export const PRODUCT_SEEDS = [
     slug: "pharaoh-jacket",
   },
   {
-    id: randomUUID(),
+    id: generateId(),
     name: "NILE JOGGERS",
     description:
       "Streetwear joggers with Egyptian wave patterns along the sides. 300gsm fleece. Comfort from the banks of the Nile.",
@@ -55,7 +55,7 @@ export const PRODUCT_SEEDS = [
     slug: "nile-joggers",
   },
   {
-    id: randomUUID(),
+    id: generateId(),
     name: "CLEOPATRA CAP",
     description:
       "Structured 6-panel cap with embroidered Cleopatra profile. Premium cotton twill. Royalty on your head.",
@@ -67,7 +67,7 @@ export const PRODUCT_SEEDS = [
     slug: "cleopatra-cap",
   },
   {
-    id: randomUUID(),
+    id: generateId(),
     name: "SPHINX SWEATPANTS",
     description:
       "Tapered sweatpants with Sphinx embroidery on the thigh. 280gsm French terry. Comfort meets mythology.",
@@ -79,7 +79,7 @@ export const PRODUCT_SEEDS = [
     slug: "sphinx-sweatpants",
   },
   {
-    id: randomUUID(),
+    id: generateId(),
     name: "PYRAMID OVERSIZED TEE",
     description:
       "Ultra-oversized tee with geometric pyramid print. 200gsm heavyweight cotton. Architectural streetwear.",
@@ -91,7 +91,7 @@ export const PRODUCT_SEEDS = [
     slug: "pyramid-oversized-tee",
   },
   {
-    id: randomUUID(),
+    id: generateId(),
     name: "CARTOUCHE LONG SLEEVE",
     description:
       "Long sleeve tee with cartouche design wrapping around the sleeve. 220gsm cotton. Ancient script, modern style.",
@@ -103,7 +103,7 @@ export const PRODUCT_SEEDS = [
     slug: "cartouche-long-sleeve",
   },
   {
-    id: randomUUID(),
+    id: generateId(),
     name: "SCARAB BOMBER",
     description:
       "Lightweight bomber with scarab beetle embroidery. Nylon shell with cotton lining. Insect-inspired streetwear.",
@@ -115,7 +115,7 @@ export const PRODUCT_SEEDS = [
     slug: "scarab-bomber",
   },
   {
-    id: randomUUID(),
+    id: generateId(),
     name: "HIEROGLYPH HOODIE",
     description:
       "Pullover hoodie with all-over hieroglyph print. 350gsm cotton blend. Wear ancient language.",
@@ -127,7 +127,7 @@ export const PRODUCT_SEEDS = [
     slug: "hieroglyph-hoodie",
   },
   {
-    id: randomUUID(),
+    id: generateId(),
     name: "NEFERTITI CROP TOP",
     description:
       "Fitted crop top with Nefertiti profile. 180gsm cotton. Celebrate the queen of beauty.",
@@ -139,7 +139,7 @@ export const PRODUCT_SEEDS = [
     slug: "nefertiti-crop-top",
   },
   {
-    id: randomUUID(),
+    id: generateId(),
     name: "ANKH CHAIN NECKLACE",
     description:
       "Stainless steel Ankh pendant on chain. Adjustable length. Timeless symbol of life.",

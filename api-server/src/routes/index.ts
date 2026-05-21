@@ -1,10 +1,4 @@
-import { Router, type IRouter } from "express";
-import healthRouter from "./health";
-import ohannaRouter from "./ohanna";
-
-const router: IRouter = Router();
-
-router.use(healthRouter);
-router.use(ohannaRouter);
-
-export default router;
+export { default } from "./ohanna";
+export { default as productsRouter } from "./products";
+export { default as ordersRouter } from "./orders";
+export { default as contactRouter } from "./contact";

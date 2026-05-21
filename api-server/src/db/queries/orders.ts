@@ -6,7 +6,7 @@
 import { db, ordersTable } from "../index";
 import { eq, desc } from "drizzle-orm";
 import type { InsertOrder, Order } from "../schema";
-import { randomUUID } from "crypto";
+import { generateId } from "../../lib/id-generator";
 
 export const orderQueries = {
   /**
@@ -51,7 +51,7 @@ export const orderQueries = {
    */
   async create(data: InsertOrder): Promise<Order> {
     const result = await db.insert(ordersTable).values({
-      id: randomUUID(),
+      id: generateId(),
       shippingAddress: data.shippingAddress,
       items: data.items,
       customerEmail: data.customerEmail,
