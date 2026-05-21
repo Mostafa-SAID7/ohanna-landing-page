@@ -139,22 +139,21 @@ export default function HomePage() {
             </motion.div>
           </div>
 
-          {/* ── 3D Hero Panel ── */}
+          {/* ── Hero Panel ── */}
           <motion.div
             initial={{ opacity: 0, x: 30 }}
             animate={{ opacity: 1, x: 0 }}
             transition={{ delay: 0.3, duration: 0.6 }}
-            className="relative hidden lg:block"
+            className="relative hidden lg:flex items-stretch"
           >
-            <div className="relative rounded-2xl overflow-hidden shadow-2xl border border-[#C89D29]/30"
-              style={{ height: 420 }}>
+            <div className="relative w-full rounded-2xl overflow-hidden shadow-2xl border border-[#C89D29]/30 min-h-[520px]">
               <img
                 src="/streetwear-egyptian-sketch.png"
                 alt="OHANNA Egyptian Streetwear"
-                className="w-full h-full object-cover object-center"
+                className="absolute inset-0 w-full h-full object-cover object-top"
                 loading="eager"
               />
-              <div className="absolute bottom-0 left-0 right-0 h-20 bg-gradient-to-t from-[#1B1B1B]/70 to-transparent flex items-end justify-center pb-3">
+              <div className="absolute bottom-0 left-0 right-0 h-24 bg-gradient-to-t from-[#1B1B1B]/75 to-transparent flex items-end justify-center pb-3">
                 <span className="text-[10px] font-black hieroglyph-font text-[#C89D29] tracking-widest">ANCIENT POWER · MODERN FORM</span>
               </div>
             </div>
@@ -243,8 +242,19 @@ export default function HomePage() {
             </FadeUp>
 
             <FadeUp delay={0.15} className="relative hidden lg:block">
-              <div className="relative rounded-2xl overflow-hidden shadow-2xl border border-[#C89D29]/20" style={{ height: 420 }}>
-                <BrandHeroVisual />
+              <div className="relative w-full rounded-2xl overflow-hidden shadow-2xl border border-[#C89D29]/20 min-h-[480px]">
+                <img
+                  src="/egyptian-streetwear-timeline.png"
+                  alt="The OHANNA Legacy"
+                  className="absolute inset-0 w-full h-full object-cover object-center"
+                  loading="lazy"
+                />
+                <div className="absolute inset-0 bg-gradient-to-t from-[#1B1B1B]/50 via-transparent to-transparent" />
+                <div className="absolute bottom-4 left-4 right-4 flex items-center gap-3">
+                  <div className="h-px flex-1 bg-[#C89D29]/50" />
+                  <span className="text-[10px] font-black hieroglyph-font text-[#C89D29] tracking-widest whitespace-nowrap">5000 YEARS OF LEGACY</span>
+                  <div className="h-px flex-1 bg-[#C89D29]/50" />
+                </div>
               </div>
             </FadeUp>
           </div>
