@@ -166,17 +166,22 @@ router.post(
         logger.error({ err: stripeErr }, "Stripe error");
         // Fall back to mock order
         sessionId = `mock_${randomUUID()}`;
-        checkoutUrl = successUrl;
+        checkoutUrl = successUrl.replace("{CHECKOUT_SESSION_ID}", sessionId);
       }
     } else {
       // Mock checkout
       sessionId = `mock_${randomUUID()}`;
-      checkoutUrl = successUrl;
+      checkoutUrl = successUrl.replace("{CHECKOUT_SESSION_ID}", sessionId);
     }
 
     // Create order in database or in-memory
     const orderId = `OHN-${Date.now()}`;
     const total = items.reduce((s: number, i: any) => s + i.product.price * i.quantity, 0);
+
+    // Add order details to the checkout URL
+    const urlWithDetails = checkoutUrl.includes('?') 
+      ? `${checkoutUrl}&order_id=${orderId}&total=${total}`
+      : `${checkoutUrl}?order_id=${orderId}&total=${total}`;
 
     try {
       await orderQueries.create({
@@ -204,7 +209,7 @@ router.post(
       });
     }
 
-    res.json({ url: checkoutUrl, sessionId, orderId });
+    res.json({ url: urlWithDetails, sessionId, orderId });
   })
 );
 

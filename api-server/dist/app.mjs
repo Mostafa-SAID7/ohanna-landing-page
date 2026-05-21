@@ -63874,14 +63874,15 @@ router2.post(
       } catch (stripeErr) {
         logger.error({ err: stripeErr }, "Stripe error");
         sessionId = `mock_${randomUUID5()}`;
-        checkoutUrl = successUrl;
+        checkoutUrl = successUrl.replace("{CHECKOUT_SESSION_ID}", sessionId);
       }
     } else {
       sessionId = `mock_${randomUUID5()}`;
-      checkoutUrl = successUrl;
+      checkoutUrl = successUrl.replace("{CHECKOUT_SESSION_ID}", sessionId);
     }
     const orderId = `OHN-${Date.now()}`;
     const total = items.reduce((s, i) => s + i.product.price * i.quantity, 0);
+    const urlWithDetails = checkoutUrl.includes("?") ? `${checkoutUrl}&order_id=${orderId}&total=${total}` : `${checkoutUrl}?order_id=${orderId}&total=${total}`;
     try {
       await orderQueries.create({
         stripeSessionId: sessionId,
@@ -63907,7 +63908,7 @@ router2.post(
         updatedAt: /* @__PURE__ */ new Date()
       });
     }
-    res.json({ url: checkoutUrl, sessionId, orderId });
+    res.json({ url: urlWithDetails, sessionId, orderId });
   })
 );
 router2.post(
