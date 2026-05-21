@@ -11,6 +11,7 @@ import WaveDivider from "@/components/ui/wave-divider";
 import ProductCard from "@/components/product/product-card";
 import Navbar from "@/components/layout/navbar";
 import Footer from "@/components/layout/footer";
+import ThreeScene from "@/components/three/ThreeScene";
 import { SEO } from "@/components/seo/seo";
 import { SEO_DATA } from "@/lib/seo-data";
 import { PRODUCTS } from "@/lib/products-data";
@@ -18,7 +19,7 @@ import { useLang } from "@/contexts/lang-context";
 import { translations } from "@/i18n";
 
 const FEATURED = PRODUCTS.filter((p) =>
-  ["BESTSELLER", "NEW", "LIMITED"].includes(p.badge),
+  p.badge && ["BESTSELLER", "NEW", "LIMITED"].includes(p.badge)
 ).slice(0, 3);
 
 const TESTIMONIALS = [
@@ -153,20 +154,9 @@ export default function HomePage() {
             transition={{ delay: 0.3, duration: 0.6 }}
             className="relative hidden lg:block"
           >
-            <div className="sketchy-border-thick section-paper p-4 transform rotate-1 shadow-[8px_8px_0_#1B1B1B] dark:shadow-[8px_8px_0_rgba(253,248,239,0.2)]">
-              <img
-                src="/streetwear-egyptian-sketch.png"
-                alt="OHANNA — Modern pharaoh streetwear"
-                className="w-full h-auto sketchy-border"
-              />
+            <div className="relative hidden lg:block">
+              <ThreeScene />
             </div>
-            <motion.div
-              animate={{ rotate: ["-12deg", "-8deg", "-12deg"] }}
-              transition={{ duration: 3, repeat: Infinity }}
-              className="absolute -top-4 -right-4 bg-[#C89D29] text-[#1B1B1B] p-3 sketchy-border"
-            >
-              <Crown className="h-8 w-8" />
-            </motion.div>
             <motion.div
               animate={{ rotate: ["12deg", "16deg", "12deg"] }}
               transition={{ duration: 4, repeat: Infinity }}

@@ -119,7 +119,7 @@ async function start() {
   let worker;
   try {
     if (filename.endsWith(".ts") || filename.endsWith(".cts")) {
-      if (!process[/* @__PURE__ */ Symbol.for("ts-node.register.instance")]) {
+      if (!process[Symbol.for("ts-node.register.instance")]) {
         realRequire("ts-node/register");
       } else if (process.env.TS_NODE_DEV) {
         realRequire("ts-node-dev");

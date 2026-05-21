@@ -69,11 +69,9 @@
     "vaul": "^1.1.2",
     "vite": "^5.0.0",
     "wouter": "^3.3.5",
-    "@splinetool/react-spline": "^0.5.5",
-    "three": "^0.166.1",
+    "three": "^0.150.0",
     "@react-three/fiber": "^8.16.8",
-    "@react-three/drei": "^9.106.2",
-    "gltf-transform": "^2.2.0",
-    
+    "@react-three/drei": "^9.106.2"
   }
 }
+    "jiti": "^1.21.0",
