@@ -1,36 +1,5 @@
 {
   "version": 2,
-  "builds": [
-    {
-      "src": "ohanna/dist/**",
-      "use": "@vercel/static"
-    },
-    {
-      "src": "api-server/dist/index.mjs",
-      "use": "@vercel/node",
-      "config": {
-        "maxDuration": 30
-      }
-    }
-  ],
-  "routes": [
-    {
-      "src": "/api/(.*)",
-      "dest": "api-server/dist/index.mjs"
-    },
-    {
-      "handle": "filesystem"
-    },
-    {
-      "src": "/(.*)",
-      "dest": "ohanna/dist/$1"
-    }
-  ],
-  "functions": {
-    "api-server/dist/index.mjs": {
-      "maxDuration": 30
-    }
-  },
   "installCommand": "cd api-server && npm ci && cd ../ohanna && npm ci",
   "buildCommand": "cd api-server && npm run build && cd ../ohanna && npm run build",
   "outputDirectory": "ohanna/dist"

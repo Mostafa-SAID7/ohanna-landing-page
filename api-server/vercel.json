@@ -3,5 +3,10 @@
   "buildCommand": "npm run build",
   "env": {
     "NODE_ENV": "production"
+  },
+  "functions": {
+    "dist/index.mjs": {
+      "maxDuration": 30
+    }
   }
 }
