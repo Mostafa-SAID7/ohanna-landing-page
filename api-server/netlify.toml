@@ -1,0 +1,17 @@
+[build]
+command = "npm ci && npm run build"
+publish = "dist"
+
+[functions]
+directory = "dist"
+node_bundler = "esbuild"
+external_node_modules = ["express", "pg", "cors", "cookie-parser", "pino", "pino-http", "stripe", "drizzle-orm", "zod"]
+
+[[redirects]]
+from = "/*"
+to = "/index.mjs"
+status = 200
+
+[env]
+[env.production]
+NODE_ENV = "production"

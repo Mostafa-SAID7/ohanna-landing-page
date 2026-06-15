@@ -7,5 +7,7 @@
     "build:frontend": "cd ohanna && npm run build",
     "install:all": "npm ci && cd api-server && npm ci && cd ../ohanna && npm ci"
   },
+  "description": "Monorepo: Frontend (Vite) deployed on Vercel, Backend (Express) deployed on Netlify",
   "dependencies": {}
 }
+

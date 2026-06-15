@@ -1,6 +1,6 @@
 {
   "version": 2,
-  "installCommand": "cd api-server && npm ci && cd ../ohanna && npm ci",
-  "buildCommand": "cd api-server && npm run build && cd ../ohanna && npm run build",
+  "installCommand": "cd ohanna && npm ci",
+  "buildCommand": "cd ohanna && npm run build",
   "outputDirectory": "ohanna/dist"
 }
