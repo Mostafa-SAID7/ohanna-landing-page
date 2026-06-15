@@ -3,8 +3,9 @@
   "private": true,
   "scripts": {
     "build": "npm run build:api && npm run build:frontend",
-    "build:api": "cd api-server && npm ci && npm run build",
-    "build:frontend": "cd ohanna && npm ci && npm run build"
+    "build:api": "cd api-server && npm run build",
+    "build:frontend": "cd ohanna && npm run build",
+    "install:all": "npm ci && cd api-server && npm ci && cd ../ohanna && npm ci"
   },
   "dependencies": {}
 }

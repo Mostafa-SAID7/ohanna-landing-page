@@ -6,7 +6,7 @@
       "use": "@vercel/static"
     },
     {
-      "src": "api-server/dist/api/index.js",
+      "src": "api-server/dist/index.mjs",
       "use": "@vercel/node",
       "config": {
         "maxDuration": 30
@@ -16,7 +16,7 @@
   "routes": [
     {
       "src": "/api/(.*)",
-      "dest": "api-server/dist/api/index.js"
+      "dest": "api-server/dist/index.mjs"
     },
     {
       "handle": "filesystem"
@@ -27,11 +27,11 @@
     }
   ],
   "functions": {
-    "api-server/dist/api/index.js": {
+    "api-server/dist/index.mjs": {
       "maxDuration": 30
     }
   },
-  "installCommand": "npm ci && cd api-server && npm ci && npm run build && cd ../ohanna && npm ci && npm run build",
+  "installCommand": "npm ci && cd api-server && npm ci && cd ../ohanna && npm ci",
   "buildCommand": "npm run build",
   "outputDirectory": "ohanna/dist"
 }
