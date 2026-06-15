@@ -1,6 +1,4 @@
 {
   "version": 2,
-  "installCommand": "cd ohanna && npm ci",
-  "buildCommand": "cd ohanna && npm run build",
-  "outputDirectory": "ohanna/dist"
+  "rootDirectory": "ohanna"
 }
