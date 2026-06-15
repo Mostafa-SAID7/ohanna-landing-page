@@ -31,7 +31,7 @@
       "maxDuration": 30
     }
   },
-  "installCommand": "npm ci && cd api-server && npm ci && cd ../ohanna && npm ci",
-  "buildCommand": "npm run build",
+  "installCommand": "cd api-server && npm ci && cd ../ohanna && npm ci",
+  "buildCommand": "cd api-server && npm run build && cd ../ohanna && npm run build",
   "outputDirectory": "ohanna/dist"
 }
